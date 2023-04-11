@@ -4,6 +4,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
@@ -35,7 +36,20 @@ public class UserService {
     }
 
     public Optional<UserModel> findByEmail(String email){
-        return userRepository.findUserModelByEmail(email);
+        return userRepository.findByEmail(email);
+    }
+
+    @Transactional
+    public void UpdateUserProfilePicture(ObjectId id, String photoUrl){
+        UserModel userModel = userRepository.findById(id).orElseThrow(()->new IllegalStateException("student with " + id + " doesn't exist"));
+        System.out.println(String.valueOf(userModel));
+        if(photoUrl != null && photoUrl.length()>0){
+            userModel.setPhotoUrl(photoUrl);
+            System.out.println(String.valueOf(userModel));
+        }
+        else {
+            System.out.printf("Error updating model");
+        }
     }
 
 }
