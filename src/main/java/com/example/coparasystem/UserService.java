@@ -12,14 +12,11 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-    private UserRepository userRepository;
-
+    private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
-
     public List<UserModel> allUsers(){
         return userRepository.findAll();
     }
@@ -32,7 +29,6 @@ public class UserService {
         }
         userRepository.save(userModel);
             System.out.println(userModel);
-
     }
 
     public Optional<UserModel> findByEmail(String email){
@@ -42,13 +38,12 @@ public class UserService {
     @Transactional
     public void UpdateUserProfilePicture(ObjectId id, String photoUrl){
         UserModel userModel = userRepository.findById(id).orElseThrow(()->new IllegalStateException("student with " + id + " doesn't exist"));
-        System.out.println(String.valueOf(userModel));
         if(photoUrl != null && photoUrl.length()>0){
             userModel.setPhotoUrl(photoUrl);
-            System.out.println(String.valueOf(userModel));
+            userRepository.save(userModel);
         }
         else {
-            System.out.printf("Error updating model");
+            System.out.println("Error updating model");
         }
     }
 
