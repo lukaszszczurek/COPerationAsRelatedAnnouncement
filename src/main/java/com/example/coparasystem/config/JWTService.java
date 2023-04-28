@@ -7,10 +7,10 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.security.Key;
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.Date;
 
 public class JWTService {
 
@@ -40,7 +40,22 @@ public class JWTService {
                  .setExpiration(new Date(System.currentTimeMillis() * 300000))
                  .signWith(getSignInKey(), SignatureAlgorithm.HS256).compact();
 
+    }
 
+    // Is token valid
+
+    public boolean isTokenValid(String token, UserDetails userDetails){
+         final  String username = extractUsername(token);
+         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
+
+    }
+
+    private boolean isTokenExpired(String token) {
+         return extractExpiration(token).before(new java.util.Date());
+    }
+
+    private Date extractExpiration(String token) {
+         return extractClaim(token, Claims::getExpiration);
 
     }
 
