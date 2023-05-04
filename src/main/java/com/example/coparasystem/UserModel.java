@@ -1,6 +1,8 @@
 package com.example.coparasystem;
 
+import com.example.coparasystem.Role;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
@@ -15,6 +17,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Document(collection = "usersCore")
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
