@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,7 @@ public class JWTService {
                  .setClaims(extraClaims)
                  .setSubject(userDetails.getUsername())
                  .setIssuedAt(new Date(System.currentTimeMillis()))
-                 .setExpiration(new Date(System.currentTimeMillis() * 300000))
+                 .setExpiration(new Date(System.currentTimeMillis() * 1000 * 60 * 60 * 24))
                  .signWith(getSignInKey(), SignatureAlgorithm.HS256).compact();
 
     }
@@ -66,7 +67,7 @@ public class JWTService {
                 .parseClaimsJws(token).getBody();
     }
 
-    private Key getSignInKey() {
+    private @NotNull Key getSignInKey() {
             byte [] keyBytes = SECRET_KEY.getBytes();
             return Keys.hmacShaKeyFor(keyBytes);
 

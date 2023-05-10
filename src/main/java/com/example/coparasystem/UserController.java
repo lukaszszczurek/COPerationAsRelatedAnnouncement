@@ -28,6 +28,8 @@ public class UserController {
         return new ResponseEntity<List<UserModel>>(userService.allUsers(), HttpStatus.OK);
     }
 
+
+
     @PostMapping
     public void createNewUser(@RequestBody UserModel userModel) {
         userService.createUser(userModel);

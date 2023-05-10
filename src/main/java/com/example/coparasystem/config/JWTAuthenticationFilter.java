@@ -14,12 +14,13 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
-    JWTService jwtService;
+   @NonNull  private final JWTService jwtService;
     private final UserDetailsService userDetailsService;
     @Override
     protected void doFilterInternal(
@@ -35,9 +36,8 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request,response);
             return;
         }
-
         jwt = header.substring(7);
-        userEmail = jwtService.extractUsername(jwt);
+           userEmail = jwtService.extractUsername(jwt);
         if(userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null){
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
             if(jwtService.isTokenValid(jwt,userDetails)){
@@ -49,7 +49,6 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
                 authenticationToken.setDetails(
 
-                        // TODO: request vs cast to javax.http ...
                         new WebAuthenticationDetailsSource().buildDetails( request)
                 );
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
