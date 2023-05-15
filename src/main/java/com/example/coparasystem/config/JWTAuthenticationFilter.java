@@ -49,6 +49,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
                 authenticationToken.setDetails(
 
+                        // TODO: request vs cast to javax.http ...
                         new WebAuthenticationDetailsSource().buildDetails( request)
                 );
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);

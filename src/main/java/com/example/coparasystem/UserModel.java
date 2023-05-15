@@ -30,7 +30,7 @@ public class UserModel implements UserDetails {
     private String surname;
     private String nickName;
     private String photoUrl;
-    private Role role;
+    private Role role = Role.USER;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

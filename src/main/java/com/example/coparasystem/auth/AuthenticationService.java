@@ -3,6 +3,7 @@ package com.example.coparasystem.auth;
 import com.example.coparasystem.Role;
 import com.example.coparasystem.UserModel;
 import com.example.coparasystem.UserRepository;
+import com.example.coparasystem.UserService;
 import com.example.coparasystem.config.JWTService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,7 +20,12 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JWTService jwtService;
     private final AuthenticationManager authenticationManager;
+
+    private final UserService userService;
     public AuthenticationResponse register(UserModel request) {
+        if(request.getEmail() == null || request.getEmail().isEmpty() || userService.findByEmail(request.getEmail()).isPresent()) {
+            throw new RuntimeException("Email is required");
+        }
         var user = UserModel.builder()
                 .name(request.getName())
                 .surname(request.getSurname())
@@ -27,6 +33,7 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
+
 
         userRepository.save(user);
         System.out.println("User saved = " + user);
