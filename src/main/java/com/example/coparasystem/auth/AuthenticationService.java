@@ -29,6 +29,7 @@ public class AuthenticationService {
                 .build();
 
         userRepository.save(user);
+        System.out.println("User saved = " + user);
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
@@ -36,6 +37,7 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
+        System.out.println("haslo" + request.getPassword().compareTo(String.valueOf(passwordEncoder.encode(request.getPassword()))));
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
@@ -46,6 +48,7 @@ public class AuthenticationService {
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
+        System.out.println("User logged = " + user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();

@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/users")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
 
     private final UserService userService;
@@ -99,19 +99,5 @@ public class UserController {
 //        // Obsługa logiki uwierzytelniania i zwracanie odpowiedzi
 //    }
 
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -4,14 +4,12 @@ import com.example.coparasystem.UserModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/v1/auth", consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping( "/api/v1/auth")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
@@ -20,6 +18,7 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> register(
             @RequestBody UserModel request
     ) {
+        System.out.println("request (User in Controller)= " + request);
         return  ResponseEntity.ok(authenticationService.register(request));
     }
 
@@ -27,6 +26,7 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest request
     ) {
+        System.out.println("request (Auth in Controller)= " + request);
       return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 
