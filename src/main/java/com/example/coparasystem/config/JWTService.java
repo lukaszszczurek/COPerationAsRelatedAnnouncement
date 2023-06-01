@@ -1,7 +1,7 @@
 package com.example.coparasystem.config;
 
-import com.example.coparasystem.auth.AuthenticationRequest;
-import com.example.coparasystem.auth.AuthenticationResponse;
+//TODO: import com.example.coparasystem.UserRepository;
+//TODO: import lombok.RequiredArgsConstructor;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

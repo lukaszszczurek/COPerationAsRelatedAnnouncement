@@ -11,9 +11,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Service
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AuthenticationService {
 
     private final UserRepository userRepository;
@@ -38,20 +40,21 @@ public class AuthenticationService {
         userRepository.save(user);
         System.out.println("User saved = " + user);
         var jwtToken = jwtService.generateToken(user);
+        System.out.println("jwtToken = " + jwtToken);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        System.out.println("haslo" + request.getPassword().compareTo(String.valueOf(passwordEncoder.encode(request.getPassword()))));
+        System.out.println("haslo");
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
                         request.getPassword()
                 )
         );
-
+        System.out.println("pip");
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);

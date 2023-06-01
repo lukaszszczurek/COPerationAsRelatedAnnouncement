@@ -1,5 +1,6 @@
-package com.example.coparasystem.config;
+package com.example.coparasystem.security;
 
+import com.example.coparasystem.config.JWTAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +29,7 @@ public class SecurityConfiguration {
 
 
 
-        http.csrf().disable()
+        http.cors().and().csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/auth/**","/api/v1/public/**")
                 .permitAll()

@@ -50,15 +50,16 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
                 authenticationToken.setDetails(
 
                         // TODO: request vs cast to javax.http ...
+                        //
                         new WebAuthenticationDetailsSource().buildDetails( request)
                 );
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
-
+//FIXME: 2021-10-20T22:00:00Z
             }
         }
         filterChain.doFilter(request,response);
 
-
+//XD: 2021-10-20T22:00:00Z 2021-10-20T22:00:00Z
     }
 }
