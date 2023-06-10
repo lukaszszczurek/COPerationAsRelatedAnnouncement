@@ -1,14 +1,13 @@
 package com.example.coparasystem.auth;
 
 import com.example.coparasystem.Role;
-import com.example.coparasystem.UserModel;
+import com.example.coparasystem.models.UserModel;
 import com.example.coparasystem.UserRepository;
 import com.example.coparasystem.UserService;
 import com.example.coparasystem.config.JWTService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;

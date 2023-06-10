@@ -10,14 +10,4 @@ public class COPARAsystemApplication {
     public static void main(String[] args) {
         SpringApplication.run(COPARAsystemApplication.class, args);
     }
-
-
-//    @Bean
-//    // create filter registration bean
-//    public FilterRegistrationBean<JwtFilter> filterRegistrationBean(){
-//        FilterRegistrationBean<JwtFilter> filterRegistrationBean = new FilterRegistrationBean<>();
-//        filterRegistrationBean.setFilter(new JwtFilter());
-//        filterRegistrationBean.addUrlPatterns("/login/*");
-//        return filterRegistrationBean;
-//    }
 }

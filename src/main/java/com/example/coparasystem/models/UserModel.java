@@ -1,4 +1,4 @@
-package com.example.coparasystem;
+package com.example.coparasystem.models;
 
 import com.example.coparasystem.Role;
 import lombok.AllArgsConstructor;
@@ -31,6 +31,9 @@ public class UserModel implements UserDetails {
     private String nickName;
     private String photoUrl;
     private Role role = Role.USER;
+
+    // private List<LoftModel> lofts;
+//    private List<ObjectId> lofts;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

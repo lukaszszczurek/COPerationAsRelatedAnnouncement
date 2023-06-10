@@ -1,6 +1,6 @@
 package com.example.coparasystem.auth;
 
-import com.example.coparasystem.UserModel;
+import com.example.coparasystem.models.UserModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

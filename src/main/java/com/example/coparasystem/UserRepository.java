@@ -1,5 +1,6 @@
 package com.example.coparasystem;
 
+import com.example.coparasystem.models.UserModel;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
