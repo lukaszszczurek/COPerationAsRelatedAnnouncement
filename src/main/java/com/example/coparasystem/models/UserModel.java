@@ -33,7 +33,7 @@ public class UserModel implements UserDetails {
     private Role role = Role.USER;
 
     // private List<LoftModel> lofts;
-//    private List<ObjectId> lofts;
+    private List<ObjectId> lofts;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -1,5 +1,6 @@
-package com.example.coparasystem;
+package com.example.coparasystem.controllers;
 
+import com.example.coparasystem.services.UserService;
 import com.example.coparasystem.models.UserModel;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -40,6 +41,8 @@ public class UserController {
     public ResponseEntity<Optional<UserModel>> getUserModel(@PathVariable String email) {
         return new ResponseEntity<Optional<UserModel>>(userService.findByEmail(email), HttpStatus.OK);
     }
+
+
 
     @PutMapping(path = "{id}")
     public void updateUserPhoto(@PathVariable("id") ObjectId id, @RequestParam String photoUrl) {

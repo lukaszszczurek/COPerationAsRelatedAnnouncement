@@ -3,7 +3,7 @@ package com.example.coparasystem.auth;
 import com.example.coparasystem.Role;
 import com.example.coparasystem.models.UserModel;
 import com.example.coparasystem.UserRepository;
-import com.example.coparasystem.UserService;
+import com.example.coparasystem.services.UserService;
 import com.example.coparasystem.config.JWTService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
