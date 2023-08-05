@@ -30,6 +30,7 @@ public class UserModel implements UserDetails {
     private String surname;
     private String nickName;
     private String photoUrl;
+    //private
     private Role role = Role.USER;
 
     // private List<LoftModel> lofts;
