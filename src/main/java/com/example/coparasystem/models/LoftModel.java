@@ -1,12 +1,12 @@
 package com.example.coparasystem.models;
 
-import com.example.coparasystem.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.el.parser.Token;
 import org.bson.types.ObjectId;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.annotation.Collation;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Map;
@@ -24,9 +24,10 @@ public class LoftModel {
     private String name;
     private String description;
     private String photoUrl;
-    private ObjectId ownerId;
+    private String ownerEmail;
     // create a collection of users that have access to this loft and their role authorization with a token
-    private Map<String, String> users;
+    // first value is email of user and the second the role
+    //private Map<String, String> users;
 
 
 

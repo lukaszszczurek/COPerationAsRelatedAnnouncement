@@ -2,7 +2,7 @@ package com.example.coparasystem.auth;
 
 import com.example.coparasystem.Role;
 import com.example.coparasystem.models.UserModel;
-import com.example.coparasystem.UserRepository;
+import com.example.coparasystem.repositoriesI.IUserRepository;
 import com.example.coparasystem.services.UserService;
 import com.example.coparasystem.config.JWTService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AuthenticationService {
 
-    private final UserRepository userRepository;
+    private final IUserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JWTService jwtService;
     private final AuthenticationManager authenticationManager;

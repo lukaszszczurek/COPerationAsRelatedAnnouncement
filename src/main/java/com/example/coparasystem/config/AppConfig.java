@@ -1,6 +1,6 @@
 package com.example.coparasystem.config;
 
-import com.example.coparasystem.UserRepository;
+import com.example.coparasystem.repositoriesI.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @RequiredArgsConstructor
 public class AppConfig {
-    private final UserRepository userRepository;
+    private final IUserRepository userRepository;
     @Bean
     public UserDetailsService userDetailsService(){
         return username -> userRepository.findByEmail(username)

@@ -1,6 +1,6 @@
 package com.example.coparasystem.services;
 
-import com.example.coparasystem.UserRepository;
+import com.example.coparasystem.repositoriesI.IUserRepository;
 import com.example.coparasystem.models.UserModel;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
@@ -12,9 +12,9 @@ import java.util.Optional;
 @Service
 //@Slf4j
 public class UserService {
-    private final UserRepository userRepository;
+    private final IUserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(IUserRepository userRepository) {
         this.userRepository = userRepository;
     }
     public List<UserModel> allUsers(){

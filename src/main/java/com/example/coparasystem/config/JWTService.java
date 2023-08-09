@@ -1,6 +1,6 @@
 package com.example.coparasystem.config;
 
-//TODO: import com.example.coparasystem.UserRepository;
+//TODO: import com.example.coparasystem.repositoriesI.UserRepository;
 //TODO: import lombok.RequiredArgsConstructor;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
