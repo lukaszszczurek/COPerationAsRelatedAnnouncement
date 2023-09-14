@@ -83,7 +83,7 @@ public class UserController {
         return true;
     }
 
-    @GetMapping("/lofts")
+    @GetMapping("/lofts/{email}")
     public List<LoftModel> getAllUserLofts (@PathVariable String email) throws Exception {
         Optional<UserModel> user = userService.findByEmail(email);
         System.out.println("V1");
@@ -91,53 +91,28 @@ public class UserController {
             throw  new Exception("User not found");
         }
 
-        UserModel userModel = user.get();
+       // UserModel userModel = user.get();
         ObjectId userId =user.get().getId();
-        List<ObjectId> loftIds =  userModel.getLofts();
+        List<ObjectId> loftIds =  user.get().getLofts();
+        if (loftIds == null) {
+            throw new Exception("User has no lofts");
+        }
         System.out.println("V2");
+        System.out.println(loftIds);
 
-       var loftData = loftIds.stream()
-               .filter(loft -> loftService.IsUserLoftMember(loft, userId))
-               .map(x -> {
-                   try {
-                       return loftService.getLoftById(x);
-                   } catch (Exception e) {
-                       throw new RuntimeException
-                               ("Service error cannot find service that user is member" + e);
-                   }
+        List<LoftModel> loftData = loftIds.stream()
+                .map(x -> {
+                    try {
+                        return loftService.getLoftById(x);
+                    } catch (Exception e) {
+                        throw new RuntimeException
+                                ("Service error cannot find service that user is member" + e);
+                    }
                 }).collect(Collectors.toList());
 
-            return loftData;
+        System.out.println("V3");
+        return loftData;
+
         }
-
-
-
-
-
-
-//    @PostMapping("/loginUsingJWT")
-//    public ResponseEntity<?> handleLoginUsingJWT(@RequestBody UserModel userModel) {
-//
-//        try{
-//            Authentication authentication = auth.authenticate(
-//                    new UsernamePasswordAuthenticationToken(userModel.getEmail(), userModel.getPassword())
-//            );
-//        }
-//
-//
-//        String token = userService.loginUsingJWT(userModel);
-//
-//        return new ResponseEntity<String>(token, HttpStatus.OK);
-//
-//
-//    }
-
-
-
-//    @PostMapping("/login")
-//    public ResponseEntity<?> handleLogin(@RequestBody LoginForm loginForm) {
-//        // Obsługa logiki uwierzytelniania i zwracanie odpowiedzi
-//    }
-
 }
 

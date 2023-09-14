@@ -28,6 +28,7 @@ public class LoftsController {
         this.userService = userService;
     }
 
+    @GetMapping("/{loftId}")
     public LoftModel getLoftById(ObjectId loftId) throws Exception
     {
         return loftService.getLoftById(loftId);
@@ -50,6 +51,17 @@ public class LoftsController {
         loftService.createNewLoft(loftModel);
         loftModel.setOwnerId(userId);
         loftModel.getUserIds().add(userId);
+        loftService.UpdateLoft(loftModel);
+        System.out.println("Loft saved");
+
+        var  Owner = userService.findByEmail(userEmail);
+        if(Owner.isPresent()){
+            var owner = Owner.get();
+            if(owner.getLofts() == null)
+                owner.setLofts(new java.util.ArrayList<>());
+            owner.getLofts().add(loftModel.getId());
+            userService.UpdateUser(owner);
+        }
         System.out.println("Loft created");
 
     }

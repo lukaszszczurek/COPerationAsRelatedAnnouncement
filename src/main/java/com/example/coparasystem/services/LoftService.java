@@ -62,5 +62,9 @@ public class LoftService {
 
        return true;
     }
+
+    public void UpdateLoft(LoftModel loftModel){
+        loftRepository.save(loftModel);
+    }
 }
 
