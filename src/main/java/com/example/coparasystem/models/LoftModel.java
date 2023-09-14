@@ -9,6 +9,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.annotation.Collation;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
 import java.util.Map;
 
 @Data
@@ -20,14 +21,15 @@ public class LoftModel {
 
 
     @Id
-    private Object id;
+    private ObjectId id;
     private String name;
     private String description;
     private String photoUrl;
-    private String ownerEmail;
+    private ObjectId ownerId;
     // create a collection of users that have access to this loft and their role authorization with a token
     // first value is email of user and the second the role
     //private Map<String, String> users;
+    private List<ObjectId> userIds;
 
 
 

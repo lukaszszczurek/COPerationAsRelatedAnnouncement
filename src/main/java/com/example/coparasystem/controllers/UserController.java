@@ -1,5 +1,7 @@
 package com.example.coparasystem.controllers;
 
+import com.example.coparasystem.models.LoftModel;
+import com.example.coparasystem.services.LoftService;
 import com.example.coparasystem.services.UserService;
 import com.example.coparasystem.models.UserModel;
 import org.bson.types.ObjectId;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -18,9 +21,11 @@ import java.util.Optional;
 public class UserController {
 
     private final UserService userService;
+    private final LoftService loftService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, LoftService loftService) {
         this.userService = userService;
+        this.loftService = loftService;
     }
 
     private MongoTemplate mongoTemplate;
@@ -77,6 +82,37 @@ public class UserController {
         System.out.println(userModel);
         return true;
     }
+
+    @GetMapping("/lofts")
+    public List<LoftModel> getAllUserLofts (@PathVariable String email) throws Exception {
+        Optional<UserModel> user = userService.findByEmail(email);
+        System.out.println("V1");
+        if(!user.isPresent()){
+            throw  new Exception("User not found");
+        }
+
+        UserModel userModel = user.get();
+        ObjectId userId =user.get().getId();
+        List<ObjectId> loftIds =  userModel.getLofts();
+        System.out.println("V2");
+
+       var loftData = loftIds.stream()
+               .filter(loft -> loftService.IsUserLoftMember(loft, userId))
+               .map(x -> {
+                   try {
+                       return loftService.getLoftById(x);
+                   } catch (Exception e) {
+                       throw new RuntimeException
+                               ("Service error cannot find service that user is member" + e);
+                   }
+                }).collect(Collectors.toList());
+
+            return loftData;
+        }
+
+
+
+
 
 
 //    @PostMapping("/loginUsingJWT")

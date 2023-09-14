@@ -53,7 +53,6 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
-        System.out.println("pip");
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
