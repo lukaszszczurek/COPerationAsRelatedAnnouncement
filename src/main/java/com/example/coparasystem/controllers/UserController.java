@@ -86,19 +86,15 @@ public class UserController {
     @GetMapping("/lofts/{email}")
     public List<LoftModel> getAllUserLofts (@PathVariable String email) throws Exception {
         Optional<UserModel> user = userService.findByEmail(email);
-        System.out.println("V1");
         if(!user.isPresent()){
             throw  new Exception("User not found");
         }
 
-       // UserModel userModel = user.get();
         ObjectId userId =user.get().getId();
         List<ObjectId> loftIds =  user.get().getLofts();
         if (loftIds == null) {
             throw new Exception("User has no lofts");
         }
-        System.out.println("V2");
-        System.out.println(loftIds);
 
         List<LoftModel> loftData = loftIds.stream()
                 .map(x -> {
@@ -110,7 +106,6 @@ public class UserController {
                     }
                 }).collect(Collectors.toList());
 
-        System.out.println("V3");
         return loftData;
 
         }
