@@ -1,20 +1,20 @@
-package com.example.coparasystem;
+package com.example.coparasystem.services;
 
+import com.example.coparasystem.repositoriesI.IUserRepository;
+import com.example.coparasystem.models.UserModel;
 import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+//@Slf4j
 public class UserService {
-    private final UserRepository userRepository;
+    private final IUserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(IUserRepository userRepository) {
         this.userRepository = userRepository;
     }
     public List<UserModel> allUsers(){
@@ -27,6 +27,7 @@ public class UserService {
         if(userByEmail.isPresent()){
             throw new IllegalStateException("User Exist");
         }
+        userModel.setPhotoUrl("https://static.wikia.nocookie.net/shaunthesheep/images/e/eb/Shaun.png/revision/latest/thumbnail/width/360/height/450?cb=20160427172317");
         userRepository.save(userModel);
             System.out.println(userModel);
     }
@@ -47,4 +48,7 @@ public class UserService {
         }
     }
 
+    public void UpdateUser(UserModel user) {
+        userRepository.save(user);
+    }
 }
