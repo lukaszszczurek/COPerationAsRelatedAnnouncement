@@ -1,5 +1,6 @@
 package com.example.coparasystem.services;
 
+import com.example.coparasystem.models.LoftModel;
 import com.example.coparasystem.repositoriesI.IUserRepository;
 import com.example.coparasystem.models.UserModel;
 import org.bson.types.ObjectId;
@@ -13,9 +14,11 @@ import java.util.Optional;
 //@Slf4j
 public class UserService {
     private final IUserRepository userRepository;
+    private final LoftService loftService;
 
-    public UserService(IUserRepository userRepository) {
+    public UserService(IUserRepository userRepository, LoftService loftService) {
         this.userRepository = userRepository;
+        this.loftService = loftService;
     }
     public List<UserModel> allUsers(){
         return userRepository.findAll();
@@ -38,7 +41,7 @@ public class UserService {
 
     @Transactional
     public void UpdateUserProfilePicture(ObjectId id, String photoUrl){
-        UserModel userModel = userRepository.findById(id).orElseThrow(()->new IllegalStateException("student with " + id + " doesn't exist"));
+        UserModel userModel = userRepository.findById(id).orElseThrow(()->new IllegalStateException("user with " + id + " doesn't exist"));
         if(photoUrl != null && photoUrl.length()>0){
             userModel.setPhotoUrl(photoUrl);
             userRepository.save(userModel);
@@ -48,7 +51,10 @@ public class UserService {
         }
     }
 
+    public List<Optional<LoftModel>> allLofts(String email) {
 
-
-
+        UserModel userModel = userRepository.findByEmail(email).orElseThrow(()->new IllegalStateException("user with " + email + " doesn't exist"));
+        var loftIds = userModel.getLofts();
+        return loftService.getLoftsByIds(loftIds);
+    }
 }

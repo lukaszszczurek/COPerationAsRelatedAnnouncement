@@ -54,7 +54,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
                 );
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
-//FIXME: 2021-10-20T22:00:00Z
+
             }
         }
         filterChain.doFilter(request,response);

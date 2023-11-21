@@ -5,14 +5,13 @@ import com.example.coparasystem.models.LoftModel;
 import com.example.coparasystem.repositoriesI.ILoftRepository;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class LoftService {
     private final ILoftRepository loftRepository;
-
 
     public LoftService(ILoftRepository loftRepository) {
         this.loftRepository = loftRepository;
@@ -27,12 +26,20 @@ public class LoftService {
         return loftRepository.findLoftModelByLoftName(loftName);
     }
 
-
     public void createNewLoft(LoftModel loftModel) {
 
-
         loftRepository.save(loftModel);
+    }
 
+    public Optional<LoftModel> getLoftByEmail(String email) {
+        // find all lofts by email
+        return loftRepository.findLoftModelByEmail(email);
+    }
+
+    public List<Optional<LoftModel>> getLoftsByIds(List<ObjectId> loftIds) {
+
+        var lofts = loftRepository.findAllById(loftIds);
+        return lofts.stream().map(Optional::of).toList();
     }
 }
 

@@ -41,12 +41,21 @@ public class LoftsController {
 //        }
 //    }
 
+    @GetMapping("/{email}")
+    public Optional<LoftModel> getLoftByEmail(@PathVariable String email){
+        try {
+            return loftService.getLoftByEmail(email);
+        }
+        catch (Exception e){
+            System.out.println("Cannot find loft with this email");
+            return null;
+        }
+    }
     @PostMapping
     public void createNewLoft(@RequestBody LoftModel loftModel){
         System.out.println("Creating new loft...");
         loftService.createNewLoft(loftModel);
         System.out.println("Loft created");
-
     }
 
 

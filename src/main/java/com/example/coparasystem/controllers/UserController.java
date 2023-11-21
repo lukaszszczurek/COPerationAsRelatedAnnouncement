@@ -1,10 +1,12 @@
 package com.example.coparasystem.controllers;
 
+import com.example.coparasystem.models.LoftModel;
 import com.example.coparasystem.services.UserService;
 import com.example.coparasystem.models.UserModel;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +32,10 @@ public class UserController {
         return new ResponseEntity<List<UserModel>>(userService.allUsers(), HttpStatus.OK);
     }
 
-
+    @GetMapping("/lofts/{email}")
+    public List<Optional<LoftModel>> getAllLofts(@PathVariable String email) {
+        return userService.allLofts(email);
+    }
 
     @PostMapping
     public void createNewUser(@RequestBody UserModel userModel) {
