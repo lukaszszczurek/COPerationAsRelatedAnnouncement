@@ -25,21 +25,20 @@ public class LoftsController {
         this.loftService = loftService;
     }
 
-    public void getLoftById(ObjectId loftId){
-        loftService.getLoftById(loftId);
-    }
+    @GetMapping("/id/{name}")
+    public Optional<LoftModel> getLoftById(@PathVariable String name){
+       try {
+           System.out.println("123");
 
-//    @GetMapping("/{loftName}")
-//    public Optional<LoftModel> getLoftByName(String loftName){
-//
-//        try {
-//            return loftService.getLoftByName(loftName);
-//        }
-//        catch (Exception e){
-//            System.out.println("Cannot find loft with this name");
-//            return null;
-//        }
-//    }
+
+           return loftService.getLoftByName(name);
+       }
+       catch (Exception e)
+       {
+           System.out.println("Cant find with this ID exception");
+           return Optional.empty();
+       }
+    }
 
     @GetMapping("/{email}")
     public Optional<LoftModel> getLoftByEmail(@PathVariable String email){
@@ -48,7 +47,7 @@ public class LoftsController {
         }
         catch (Exception e){
             System.out.println("Cannot find loft with this email");
-            return null;
+            return Optional.empty();
         }
     }
     @PostMapping

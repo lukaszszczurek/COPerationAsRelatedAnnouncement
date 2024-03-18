@@ -18,11 +18,13 @@ public class LoftService {
     }
 
 
-    public void getLoftById(ObjectId loftId) {
+    public Optional<LoftModel> getLoftById(ObjectId loftId) {
         loftRepository.findById(loftId);
+        return loftRepository.findById(loftId);
     }
 
     public Optional<LoftModel> getLoftByName(String loftName) {
+        System.out.println("hi in getLoftByName");
         return loftRepository.findLoftModelByLoftName(loftName);
     }
 

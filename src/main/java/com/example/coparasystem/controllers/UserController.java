@@ -47,24 +47,11 @@ public class UserController {
         return new ResponseEntity<Optional<UserModel>>(userService.findByEmail(email), HttpStatus.OK);
     }
 
-
-
     @PutMapping(path = "{id}")
     public void updateUserPhoto(@PathVariable("id") ObjectId id, @RequestParam String photoUrl) {
         userService.UpdateUserProfilePicture(id, photoUrl);
         System.out.printf(id + " } + id");
     }
-
-    @GetMapping("/test")
-    public String test() {
-        return "test";
-    }
-
-    @GetMapping("/test2")
-    public String test2() {
-        return "test2";
-    }
-
     @CrossOrigin
     @PostMapping("/login")
     public boolean handleLogin(@RequestBody UserModel userModel) {
@@ -82,31 +69,6 @@ public class UserController {
         System.out.println(userModel);
         return true;
     }
-
-
-//    @PostMapping("/loginUsingJWT")
-//    public ResponseEntity<?> handleLoginUsingJWT(@RequestBody UserModel userModel) {
-//
-//        try{
-//            Authentication authentication = auth.authenticate(
-//                    new UsernamePasswordAuthenticationToken(userModel.getEmail(), userModel.getPassword())
-//            );
-//        }
-//
-//
-//        String token = userService.loginUsingJWT(userModel);
-//
-//        return new ResponseEntity<String>(token, HttpStatus.OK);
-//
-//
-//    }
-
-
-
-//    @PostMapping("/login")
-//    public ResponseEntity<?> handleLogin(@RequestBody LoginForm loginForm) {
-//        // Obsługa logiki uwierzytelniania i zwracanie odpowiedzi
-//    }
 
 }
 
