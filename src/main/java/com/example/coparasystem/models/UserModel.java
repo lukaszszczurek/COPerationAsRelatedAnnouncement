@@ -36,6 +36,10 @@ public class UserModel implements UserDetails {
     // private List<LoftModel> lofts;
     private List<ObjectId> lofts;
 
+    boolean isAdmitOfLoft(LoftModel loftModel) {
+       return this.lofts.contains(loftModel);
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));

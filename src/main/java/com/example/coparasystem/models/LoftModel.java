@@ -3,13 +3,8 @@ package com.example.coparasystem.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.annotation.Collation;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.Map;
 
 @Data
 @AllArgsConstructor

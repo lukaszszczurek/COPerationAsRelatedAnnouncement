@@ -6,10 +6,8 @@ import com.example.coparasystem.models.UserModel;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Optional;
-
 @Service
 //@Slf4j
 public class UserService {
@@ -42,7 +40,7 @@ public class UserService {
     @Transactional
     public void UpdateUserProfilePicture(ObjectId id, String photoUrl){
         UserModel userModel = userRepository.findById(id).orElseThrow(()->new IllegalStateException("user with " + id + " doesn't exist"));
-        if(photoUrl != null && photoUrl.length()>0){
+        if(photoUrl != null && !photoUrl.isEmpty()){
             userModel.setPhotoUrl(photoUrl);
             userRepository.save(userModel);
         }

@@ -15,12 +15,6 @@ public class LoftsController {
 
     private final LoftService loftService;
 
-    @GetMapping()
-    public String e4(){
-        System.out.println("sdsadd");
-        return "e4";
-    }
-
     public LoftsController(LoftService loftService) {
         this.loftService = loftService;
     }
@@ -28,9 +22,6 @@ public class LoftsController {
     @GetMapping("/id/{name}")
     public Optional<LoftModel> getLoftById(@PathVariable String name){
        try {
-           System.out.println("123");
-
-
            return loftService.getLoftByName(name);
        }
        catch (Exception e)

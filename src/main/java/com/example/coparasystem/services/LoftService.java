@@ -1,7 +1,7 @@
 package com.example.coparasystem.services;
 
-
 import com.example.coparasystem.models.LoftModel;
+import com.example.coparasystem.models.UserModel;
 import com.example.coparasystem.repositoriesI.ILoftRepository;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,6 @@ public class LoftService {
     public LoftService(ILoftRepository loftRepository) {
         this.loftRepository = loftRepository;
     }
-
 
     public Optional<LoftModel> getLoftById(ObjectId loftId) {
         loftRepository.findById(loftId);

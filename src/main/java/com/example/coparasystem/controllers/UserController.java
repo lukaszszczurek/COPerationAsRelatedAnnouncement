@@ -25,8 +25,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    private MongoTemplate mongoTemplate;
-
     @GetMapping()
     public ResponseEntity<List<UserModel>> getAllUsers() {
         return new ResponseEntity<List<UserModel>>(userService.allUsers(), HttpStatus.OK);
